@@ -1,10 +1,10 @@
 import * as api from '../api'
 import {
-    fetch_All_Posts,
-    create_Post,
-    update_Post,
-    delete_Post,
-    like_Post,
+    FETCH_ALL,
+    CREATE,
+    DELETE,
+    LIKE,
+    UPDATE,
 } from '../constants/actionTypes'
 import { postInterface, dispatchInterface } from '../interfaces'
 
@@ -13,7 +13,7 @@ export const getPosts = () => async (
 ) => {
     try {
         const data = await api.fetchPosts()
-        dispatch({ type: fetch_All_Posts, payload: data })
+        dispatch({ type: FETCH_ALL, payload: data })
     } catch (error) {
         console.log(error.message)
     }
@@ -23,7 +23,7 @@ export const createPost = (newPost: postInterface) => async (
 ) => {
     try {
         const { data } = await api.createPost(newPost)
-        dispatch({ type: create_Post, payload: data })
+        dispatch({ type: CREATE, payload: data })
     } catch (error) {
         console.log(error.message)
     }
@@ -33,7 +33,7 @@ export const updatePost = (id: string, post: postInterface) => async (
 ) => {
     try {
         const { data } = await api.updatePost(id, post)
-        dispatch({ type: update_Post, payload: data })
+        dispatch({ type: UPDATE, payload: data })
     } catch (error) {
         console.log(error.message)
     }
@@ -43,7 +43,7 @@ export const deletePost = (id: string) => async (
 ) => {
     try {
         await api.deletePost(id)
-        dispatch({ type: delete_Post, payload: id })
+        dispatch({ type: DELETE, payload: id })
     } catch (error) {
         console.log(error.message)
     }
@@ -53,6 +53,6 @@ export const likePost = (id: string) => async (
 ) => {
     try {
         const { data } = await api.likePost(id)
-        dispatch({ type: like_Post, payload: data })
+        dispatch({ type: LIKE, payload: data })
     } catch (error) {}
 }

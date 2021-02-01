@@ -1,23 +1,23 @@
 import { postInterface } from '../interfaces'
 import {
-    fetch_All_Posts,
-    create_Post,
-    update_Post,
-    delete_Post,
-    like_Post,
+    FETCH_ALL,
+    CREATE,
+    DELETE,
+    LIKE,
+    UPDATE,
 } from '../constants/actionTypes'
 export const posts = (posts: postInterface[] = [], action: any) => {
     switch (action.type) {
-        case fetch_All_Posts:
+        case FETCH_ALL:
             return action.payload
-        case create_Post:
+        case CREATE:
             return [...posts, action.payload]
-        case update_Post:
-        case like_Post:
+        case UPDATE:
+        case LIKE:
             return posts.map(post =>
                 post._id === action.payload._id ? action.payload : post,
             )
-        case delete_Post:
+        case DELETE:
             return posts.filter(post => post._id !== action.payload)
         default:
             return posts
