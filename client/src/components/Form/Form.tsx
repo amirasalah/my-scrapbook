@@ -7,13 +7,14 @@ import { postInterface } from '../../interfaces'
 
 const Form: FC<any> = ({ currentId, setCurrentId }) => {
     const dispatch = useDispatch()
-    const [postData, setPostData] = useState<postInterface>({
+    const emptyPost: postInterface = {
         creator: '',
         title: '',
         message: '',
         tags: [],
         selectedFile: [],
-    })
+    }
+    const [postData, setPostData] = useState<postInterface>(emptyPost)
     const post = useSelector(
         (state: { posts: postInterface[] }) =>
             currentId &&
@@ -35,13 +36,7 @@ const Form: FC<any> = ({ currentId, setCurrentId }) => {
     }
     const clearForm = () => {
         setCurrentId(0)
-        setPostData({
-            creator: '',
-            title: '',
-            message: '',
-            tags: [],
-            selectedFile: [],
-        })
+        setPostData(emptyPost)
     }
     return (
         <>
@@ -90,17 +85,17 @@ const Form: FC<any> = ({ currentId, setCurrentId }) => {
                         })
                     }
                 />
-                <label htmlFor='tags'>Tags</label>
+                <label htmlFor='tags'>Tags (coma separated)</label>
                 <input
                     name='tags'
                     placeholder='Tags'
-                    value={postData.tags || ''}
+                    value={postData.tags}
                     className='mt-1 block w-full'
                     type='text'
                     onChange={e =>
                         setPostData({
                             ...postData,
-                            tags: [...postData.tags, e.target.value],
+                            tags: e.target.value.split(','),
                         })
                     }
                 />
