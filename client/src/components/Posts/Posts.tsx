@@ -15,6 +15,7 @@ const Posts: FC<any> = () => {
     )
     const addNewMemory = () => {
         setCurrentId('0')
+        setPopUpVisible(true)
         console.log(currentId)
     }
     return (
@@ -23,17 +24,12 @@ const Posts: FC<any> = () => {
             {!posts.length ? (
                 <div>loading...</div>
             ) : (
-                <>
+                <PopupContext.Provider
+                    value={{ popUpVisible, setPopUpVisible }}
+                >
                     <section className='grid grid-cols-3 gap-4 auto-rows-max'>
                         {posts.map((post: postInterface) => (
-                            <PopupContext.Provider
-                                value={{ popUpVisible, setPopUpVisible }}
-                            >
-                                <Post postData={post} key={post._id} />
-                                <button onClick={addNewMemory}>
-                                    Add new Memory
-                                </button>
-                            </PopupContext.Provider>
+                            <Post postData={post} key={post._id} />
                         ))}
                     </section>
                     {popUpVisible && (
@@ -41,7 +37,8 @@ const Posts: FC<any> = () => {
                             <Form />
                         </Portal>
                     )}
-                </>
+                    <button onClick={addNewMemory}>Add new Memory</button>
+                </PopupContext.Provider>
             )}
         </div>
     )
