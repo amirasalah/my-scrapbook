@@ -8,7 +8,7 @@ import Form from '../Form/Form'
 
 const Posts: FC<any> = () => {
     const [popUpVisible, setPopUpVisible] = useState<boolean>(false)
-    const { currentId, setCurrentId } = useContext(CurrentIdContext)
+    const { setCurrentId } = useContext(CurrentIdContext)
 
     const posts = useSelector(
         (state: { posts: postInterface[] }) => state.posts,
