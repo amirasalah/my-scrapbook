@@ -42,7 +42,6 @@ const Form: FC<any> = () => {
         setCurrentId('0')
         setPostData(emptyPost)
     }
-    console.log(currentId)
     return (
         <>
             <button onClick={() => setPopUpVisible(false)}>Close</button>

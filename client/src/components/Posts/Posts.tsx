@@ -16,7 +16,6 @@ const Posts: FC<any> = () => {
     const addNewMemory = () => {
         setCurrentId('0')
         setPopUpVisible(true)
-        console.log(currentId)
     }
     return (
         <div>
