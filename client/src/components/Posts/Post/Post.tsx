@@ -1,10 +1,14 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../../../actions/posts'
+import { postComponentInterface } from '../../../interfaces'
+import { PopupContext, CurrentIdContext } from '../../../context/context'
 
-const Post: FC<any> = ({ postData, setCurrentId }) => {
+const Post: FC<postComponentInterface> = ({ postData }) => {
     const dispatch = useDispatch()
+    const { setPopUpVisible } = useContext(PopupContext)
+    const { setCurrentId } = useContext(CurrentIdContext)
     const likeCurrentPost = () => {
         dispatch(likePost(postData._id))
     }
@@ -12,6 +16,7 @@ const Post: FC<any> = ({ postData, setCurrentId }) => {
         dispatch(deletePost(postData._id))
     }
     const editPost = () => {
+        setPopUpVisible(true)
         setCurrentId(postData._id)
     }
 
@@ -26,7 +31,6 @@ const Post: FC<any> = ({ postData, setCurrentId }) => {
             <div>
                 <p>{postData.message}</p>
                 <p>Tags: {postData.tags}</p>
-                {/* <img src={postData.selectedFile[0].base64} alt='card data' /> */}
             </div>
             <div>
                 <button

@@ -1,12 +1,15 @@
-import React, { useState, useEffect, FC } from 'react'
-// import FileBase64 from 'react-file-base64'
+import React, { useState, useEffect, useContext, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, updatePost } from '../../actions/posts'
 import HalfContainer from '../Shared/halfContainer/halfContainer'
 import { postInterface } from '../../interfaces'
+import { PopupContext, CurrentIdContext } from '../../context/context'
 
-const Form: FC<any> = ({ currentId, setCurrentId }) => {
+const Form: FC<any> = () => {
     const dispatch = useDispatch()
+    const { setPopUpVisible } = useContext(PopupContext)
+    const { currentId, setCurrentId } = useContext(CurrentIdContext)
+
     const emptyPost: postInterface = {
         creator: '',
         title: '',
@@ -27,21 +30,27 @@ const Form: FC<any> = ({ currentId, setCurrentId }) => {
     }, [post])
     const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
-        if (currentId === 0) {
+        if (currentId === '0') {
             dispatch(createPost(postData))
         } else {
             dispatch(updatePost(currentId, postData))
         }
         clearForm()
+        setPopUpVisible(false)
     }
     const clearForm = () => {
-        setCurrentId(0)
+        setCurrentId('0')
         setPostData(emptyPost)
     }
+    console.log(currentId)
     return (
         <>
+            <button onClick={() => setPopUpVisible(false)}>Close</button>
+
             <h6>
-                {currentId ? `Editing "${post.title}"` : 'Creating a Memory'}
+                {currentId === '0'
+                    ? 'Creating a Memory'
+                    : `Editing "${post.title}"`}
             </h6>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='creator'>Creator</label>
@@ -99,13 +108,6 @@ const Form: FC<any> = ({ currentId, setCurrentId }) => {
                         })
                     }
                 />
-                <section className='mt-1 block w-full'>
-                    {/* <FileBase64
-                        onDone={file =>
-                            setPostData({ ...postData, selectedFile: file })
-                        }
-                    /> */}
-                </section>
                 <div className='flex'>
                     <HalfContainer className='mr-1'>
                         <button

@@ -12,3 +12,10 @@ export interface dispatchInterface {
     type: string
     payload: postInterface[]
 }
+export interface childrenInterface {
+    children: JSX.Element[] | JSX.Element
+    className?: any
+}
+export interface postComponentInterface {
+    postData: postInterface
+}
