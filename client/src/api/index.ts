@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { postInterface } from '../interfaces'
 
-const url = 'http://localhost:5000/posts'
+const url = 'https://amira-scrapbook.herokuapp.com/posts'
 
 export const fetchPosts = async () => {
     const { data } = await axios.get(url)
