@@ -21,34 +21,53 @@ const Post: FC<postComponentInterface> = ({ postData }) => {
     }
 
     return (
-        <section>
-            <div>
-                <h6>{postData.title}</h6>
-                <p>Post by: {postData.creator}</p>
-                <p>Date: {moment(postData.createdAt).fromNow()}</p>
-                <p>Likes: {postData.likeCount}</p>
-            </div>
-            <div>
-                <p>{postData.message}</p>
-                <p>Tags: {postData.tags}</p>
-            </div>
-            <div>
+        <section className='border-l-4 border-blue-200'>
+            <section>
+                <h3 className='text-2xl pl-2 font-bold mb-2'>
+                    {postData.title}
+                </h3>
+                <p className='pl-2 mb-2'>{postData.message}</p>
+                <section className='p-2'>
+                    <p>
+                        <span className='text-lg font-bold'>Post by:</span>{' '}
+                        {postData.creator}
+                    </p>
+                    <p>
+                        <span className='text-lg font-bold'>Date:</span>{' '}
+                        {moment(postData.createdAt).fromNow()}
+                    </p>
+                    <p>
+                        <span className='text-lg font-bold'>Likes:</span>{' '}
+                        {postData.likeCount}
+                    </p>
+                </section>
+            </section>
+            <section className='p-2'>
+                <p>
+                    <span className='text-lg font-bold'>Tags:</span>{' '}
+                    {postData.tags}
+                </p>
+            </section>
+            <section className='p-2'>
                 <button
-                    className='text-center w-full'
+                    className='text-center w-full p-1 mt-1 block bg-blue-200 font-bold'
                     onClick={likeCurrentPost}
                 >
                     Like
                 </button>
                 <button
-                    className='text-center w-full'
+                    className='text-center w-full p-1 mt-1 block bg-blue-200 font-bold'
                     onClick={deleteCurrentPost}
                 >
                     Delete
                 </button>
-                <button className='text-center w-full' onClick={editPost}>
+                <button
+                    className='text-center w-full p-1 mt-1 block bg-blue-200 font-bold'
+                    onClick={editPost}
+                >
                     Edit
                 </button>
-            </div>
+            </section>
         </section>
     )
 }
