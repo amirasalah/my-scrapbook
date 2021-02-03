@@ -1,5 +1,5 @@
-import React, { FC, useState, useContext } from 'react'
-import { PopupContext, CurrentIdContext } from '../../context/context'
+import React, { FC, useContext } from 'react'
+import { PopupContext } from '../../context/context'
 import { useSelector } from 'react-redux'
 import Post from './Post/Post'
 import { postInterface } from '../../interfaces'
@@ -7,8 +7,7 @@ import Portal from '../Portal/portal'
 import Form from '../Form/Form'
 
 const Posts: FC<any> = () => {
-    const [popUpVisible, setPopUpVisible] = useState<boolean>(false)
-
+    const { popUpVisible } = useContext(PopupContext)
     const posts = useSelector(
         (state: { posts: postInterface[] }) => state.posts,
     )
