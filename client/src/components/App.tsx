@@ -1,40 +1,22 @@
-import React, { Dispatch, FC, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { getPosts } from '../actions/posts'
-import { CurrentIdContext, PopupContext } from '../context/context'
+import React, { FC } from 'react'
 import { Header } from './Header/header'
-import Posts from './Posts/Posts'
-import { TopBanner } from './Posts/TopBanner/TopBanner'
-import Container from './Shared/container/container'
+import Home from './Home/Home'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Auth from './Auth/Auth'
 
 const App: FC<any> = () => {
-    const [currentId, setCurrentId] = useState<string>('0')
-    const [popUpVisible, setPopUpVisible] = useState<boolean>(false)
-
-    const dispatch = useDispatch<Dispatch<any>>()
-    useEffect(() => {
-        dispatch(getPosts())
-    }, [dispatch])
-
     return (
-        <>
+        <BrowserRouter>
             <Header />
-
-            <Container className='flex justify-center'>
-                <section className='flex flex-col'>
-                    <CurrentIdContext.Provider
-                        value={{ currentId, setCurrentId }}
-                    >
-                        <PopupContext.Provider
-                            value={{ popUpVisible, setPopUpVisible }}
-                        >
-                            <TopBanner />
-                            <Posts />
-                        </PopupContext.Provider>
-                    </CurrentIdContext.Provider>
-                </section>
-            </Container>
-        </>
+            <Switch>
+                <Route exact path='/'>
+                    <Home />
+                </Route>
+                <Route path='/auth'>
+                    <Auth />
+                </Route>
+            </Switch>
+        </BrowserRouter>
     )
 }
 export default App
