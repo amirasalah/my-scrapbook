@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react'
+
 export interface postInterface {
     title: string
     message: string
@@ -18,4 +20,11 @@ export interface childrenInterface {
 }
 export interface postComponentInterface {
     postData: postInterface
+}
+export interface buttonInterface {
+    text?: string
+    classes: string
+    type?: 'button' | 'submit' | 'reset'
+    children?: JSX.Element | JSX.Element[]
+    onButtonClicked?: (event: MouseEvent) => void
 }

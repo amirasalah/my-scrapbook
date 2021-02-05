@@ -5,6 +5,7 @@ import HalfContainer from '../Shared/halfContainer/halfContainer'
 import { postInterface } from '../../interfaces'
 import { PopupContext, CurrentIdContext } from '../../context/context'
 import Container from '../Shared/container/container'
+import Button from '../Shared/Button/Button'
 
 const Form: FC<any> = () => {
     const dispatch = useDispatch()
@@ -123,21 +124,19 @@ const Form: FC<any> = () => {
                         </section>
                         <div className='flex'>
                             <HalfContainer className='mr-1'>
-                                <button
+                                <Button
                                     type='submit'
-                                    className='p-1 mt-1 block w-full bg-blue-200'
-                                >
-                                    Submit
-                                </button>
+                                    text='Submit'
+                                    classes='p-1 mt-1 w-full'
+                                />
                             </HalfContainer>
                             <HalfContainer className='ml-1'>
-                                <button
+                                <Button
                                     type='submit'
-                                    className='p-1 mt-1 block w-full bg-blue-200'
-                                    onChange={clearForm}
-                                >
-                                    Clear Form
-                                </button>
+                                    text='Clear Form'
+                                    classes='p-1 mt-1  w-full'
+                                    onButtonClicked={clearForm}
+                                />
                             </HalfContainer>
                         </div>
                     </form>

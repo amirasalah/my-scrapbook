@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../../../actions/posts'
 import { postComponentInterface } from '../../../interfaces'
 import { PopupContext, CurrentIdContext } from '../../../context/context'
+import Button from '../../Shared/Button/Button'
 
 const Post: FC<postComponentInterface> = ({ postData }) => {
     const dispatch = useDispatch()
@@ -49,24 +50,21 @@ const Post: FC<postComponentInterface> = ({ postData }) => {
                 </p>
             </section>
             <section className='p-2'>
-                <button
-                    className='text-center w-full p-1 mt-1 block bg-blue-200 font-bold'
-                    onClick={likeCurrentPost}
-                >
-                    Like
-                </button>
-                <button
-                    className='text-center w-full p-1 mt-1 block bg-blue-200 font-bold'
-                    onClick={deleteCurrentPost}
-                >
-                    Delete
-                </button>
-                <button
-                    className='text-center w-full p-1 mt-1 block bg-blue-200 font-bold'
-                    onClick={editPost}
-                >
-                    Edit
-                </button>
+                <Button
+                    classes='text-center w-full p-1 mt-1'
+                    text='Like'
+                    onButtonClicked={likeCurrentPost}
+                />
+                <Button
+                    classes='text-center w-full p-1 mt-1'
+                    text='Delete'
+                    onButtonClicked={deleteCurrentPost}
+                />
+                <Button
+                    classes='text-center w-full p-1 mt-1'
+                    text='Edit'
+                    onButtonClicked={editPost}
+                />
             </section>
         </section>
     )

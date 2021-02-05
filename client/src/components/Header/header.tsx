@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Container from '../Shared/container/container'
 import { Link } from 'react-router-dom'
+import Button from '../Shared/Button/Button'
 
 export const Header: FC<any> = () => {
     const user: any = null
@@ -22,9 +23,9 @@ export const Header: FC<any> = () => {
                         {user ? (
                             <div>Log Out</div>
                         ) : (
-                            <button className='p-1 block w-full bg-blue-200'>
+                            <Button classes='p-1 w-full '>
                                 <Link to='/auth'>Log In</Link>
-                            </button>
+                            </Button>
                         )}
                     </section>
                 </section>
