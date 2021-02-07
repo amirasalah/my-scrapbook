@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react'
+import { MouseEvent, ChangeEvent } from 'react'
 
 export interface postInterface {
     title: string
@@ -23,8 +23,17 @@ export interface postComponentInterface {
 }
 export interface buttonInterface {
     text?: string
-    classes: string
+    classes?: string
     type?: 'button' | 'submit' | 'reset'
-    children?: JSX.Element | JSX.Element[]
+    children?: JSX.Element | JSX.Element[] | string
     onButtonClicked?: (event: MouseEvent) => void
+}
+export interface inputInterface {
+    name: string
+    handleChange: (event: ChangeEvent<HTMLInputElement>) => void
+    label: string
+    half?: boolean
+    autoFocus?: boolean
+    type?: string
+    handleShowPassword?: Function
 }
