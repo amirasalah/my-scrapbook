@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import postRoutes from '../routes/posts.js'
+import userRoutes from '../routes/user.js'
+
 import dotenv from 'dotenv'
 
 const app = express()
@@ -16,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Hello!')
 })
 app.use('/posts', postRoutes)
-
+app.use('/user', userRoutes)
 mongoose
     .connect(process.env.CONNECTION_STRING, {
         useNewUrlParser: true,

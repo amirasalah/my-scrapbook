@@ -16,4 +16,5 @@ postRoutes.get('/:id', getPost)
 postRoutes.patch('/:id', updatePost)
 postRoutes.delete('/:id', deletePost)
 postRoutes.patch('/:id/likePost', likePost)
+
 export default postRoutes
