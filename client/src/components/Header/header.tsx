@@ -1,10 +1,29 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Container from '../Shared/container/container'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import Button from '../Shared/Button/Button'
+import { useDispatch } from 'react-redux'
+import { LOGOUT } from '../../constants/actionTypes'
 
 export const Header: FC<any> = () => {
-    const user: any = null
+    const [user, setUser] = useState(
+        JSON.parse(localStorage.getItem('profile')),
+    )
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const location = useLocation()
+
+    const logOut = () => {
+        dispatch({
+            type: LOGOUT,
+        })
+        history.push('/')
+        setUser(null)
+    }
+    useEffect(() => {
+        // const token = user?.token
+        setUser(JSON.parse(localStorage.getItem('profile')))
+    }, [location])
     return (
         <header className='px-4 bg-red-200'>
             <Container className='py-2'>
@@ -20,8 +39,20 @@ export const Header: FC<any> = () => {
                         />
                     </section>
                     <section className='flex items-center'>
-                        {user ? (
-                            <div>Log Out</div>
+                        {user?.result ? (
+                            <div className='flex items-center'>
+                                <img
+                                    className='w-8 mr-2'
+                                    src={user?.result?.imageUrl}
+                                    alt={user?.result.name}
+                                />
+                                <Button
+                                    onButtonClicked={logOut}
+                                    classes='p-1 w-full '
+                                >
+                                    Log Out
+                                </Button>
+                            </div>
                         ) : (
                             <Button classes='p-1 w-full '>
                                 <Link to='/auth'>Log In</Link>

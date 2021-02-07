@@ -37,3 +37,8 @@ export interface inputInterface {
     type?: string
     handleShowPassword?: Function
 }
+export interface authReducerInterface {
+    authData: any
+    loading: boolean
+    errors: any
+}
