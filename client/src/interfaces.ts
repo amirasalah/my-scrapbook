@@ -42,3 +42,10 @@ export interface authReducerInterface {
     loading: boolean
     errors: any
 }
+export interface formDataInterface {
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+    confirmPassword: string
+}

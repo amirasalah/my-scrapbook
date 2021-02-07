@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState, ChangeEvent, FormEvent } from 'react'
 import Container from '../Shared/container/container'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -7,8 +7,9 @@ import Input from '../Shared/Input/Input'
 import Button from '../Shared/Button/Button'
 import { signIn, signUp } from '../../actions/auth'
 import { AUTH } from '../../constants/actionTypes'
+import { formDataInterface } from '../../interfaces'
 
-const initialState = {
+const initialFormState: formDataInterface = {
     firstName: '',
     lastName: '',
     email: '',
@@ -16,31 +17,30 @@ const initialState = {
     confirmPassword: '',
 }
 
-const Auth = () => {
-    // const user: any = null
+const Auth: FC<any> = () => {
     const dispatch = useDispatch()
-    const [form, setForm] = useState(initialState)
-    const [isSignUp, setIsSignUp] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
+    const [form, setForm] = useState<formDataInterface>(initialFormState)
+    const [isSignUp, setIsSignUp] = useState<boolean>(false)
+    const [showPassword, setShowPassword] = useState<boolean>(false)
     const history = useHistory()
 
-    const handleShowPassword = () => setShowPassword(!showPassword)
-    const switchMode = () => {
-        setForm(initialState)
+    const handleShowPassword = (): void => setShowPassword(!showPassword)
+    const switchMode = (): void => {
+        setForm(initialFormState)
         setIsSignUp(prevIsSignUp => !prevIsSignUp)
         setShowPassword(false)
     }
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
-
         if (isSignUp) {
             dispatch(signUp(form, history))
         } else {
             dispatch(signIn(form, history))
         }
     }
-    const handleChange = (e: any) =>
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void =>
         setForm({ ...form, [e.target.name]: e.target.value })
+
     const googleSuccess = async (res: any) => {
         const result = res?.profileObj
         const token = res?.tokenId
