@@ -6,6 +6,7 @@ export const signIn = (formData: formDataInterface, router: any) => async (
     dispatch: any,
 ) => {
     try {
+        console.log('ddd')
         const { data } = await api.signIn(formData)
         dispatch({ type: AUTH, data })
         router.push('/')
@@ -19,7 +20,6 @@ export const signUp = (formData: formDataInterface, router: any) => async (
 ) => {
     try {
         const { data } = await api.signUp(formData)
-        console.log(data)
         dispatch({ type: AUTH, data })
         router.push('/')
     } catch (error) {

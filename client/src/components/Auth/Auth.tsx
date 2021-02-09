@@ -34,6 +34,9 @@ const Auth: FC<any> = () => {
         if (isSignUp) {
             dispatch(signUp(form, history))
         } else {
+            delete form.confirmPassword
+            delete form.firstName
+            delete form.lastName
             dispatch(signIn(form, history))
         }
     }

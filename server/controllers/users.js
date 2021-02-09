@@ -4,8 +4,10 @@ import User from '../models/user.js'
 
 export const signin = async (req, res) => {
     const { email, password } = req.body
+
     try {
-        const existingUser = await user.findOne({ email })
+        const existingUser = await User.findOne({ email })
+        console.log(existingUser)
         if (!existingUser)
             return res.status(404).json({ message: 'User Does not exist' })
         const isPasswordCorrect = await bcrypt.compare(
@@ -45,6 +47,9 @@ export const signup = async (req, res) => {
             confirmPassword,
             name: `${(firstName, lastName)}`,
         })
+        if (result) {
+            console.log(result)
+        }
         const token = jwt.sign(
             {
                 email: result.email,
@@ -53,12 +58,10 @@ export const signup = async (req, res) => {
             'test',
             { expiresIn: '1h' },
         )
-        console.log(result)
-        res.status(201).json({
-            result,
-            token,
-        })
+
+        res.status(201).json({ result, token })
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' })
+        console.log(error)
     }
 }
