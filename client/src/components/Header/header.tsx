@@ -21,7 +21,6 @@ export const Header: FC<any> = () => {
         setUser(null)
     }
     useEffect(() => {
-        // const token = user?.token
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
     return (
@@ -41,11 +40,14 @@ export const Header: FC<any> = () => {
                     <section className='flex items-center'>
                         {user?.result ? (
                             <div className='flex items-center'>
-                                <img
-                                    className='w-8 mr-2'
-                                    src={user?.result?.imageUrl}
-                                    alt={user?.result.name}
-                                />
+                                {user?.result?.imageUrl && (
+                                    <img
+                                        className='w-8 mr-2'
+                                        src={user?.result?.imageUrl}
+                                        alt={user?.result?.name}
+                                    />
+                                )}
+                                <p>{user.result.name}</p>
                                 <Button
                                     onButtonClicked={logOut}
                                     classes='p-1 w-full '

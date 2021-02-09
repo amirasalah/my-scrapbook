@@ -13,7 +13,6 @@ const Form: FC<any> = () => {
     const { currentId, setCurrentId } = useContext(CurrentIdContext)
 
     const emptyPost: postInterface = {
-        creator: '',
         title: '',
         message: '',
         tags: [],
@@ -59,22 +58,6 @@ const Form: FC<any> = () => {
                         </button>
                     </section>
                     <form onSubmit={handleSubmit}>
-                        <section className='my-4'>
-                            <label htmlFor='creator'>Creator</label>
-                            <input
-                                name='creator'
-                                placeholder='Creator'
-                                value={postData.creator}
-                                className='mt-1 block w-full'
-                                type='text'
-                                onChange={e =>
-                                    setPostData({
-                                        ...postData,
-                                        creator: e.target.value,
-                                    })
-                                }
-                            />
-                        </section>
                         <section className='my-4'>
                             <label htmlFor='title'>Title</label>
                             <input

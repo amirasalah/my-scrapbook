@@ -3,7 +3,6 @@ import { MouseEvent, ChangeEvent } from 'react'
 export interface postInterface {
     title: string
     message: string
-    creator: string
     tags: string[]
     selectedFile: []
     likeCount?: number

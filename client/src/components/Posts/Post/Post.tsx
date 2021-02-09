@@ -30,10 +30,6 @@ const Post: FC<postComponentInterface> = ({ postData }) => {
                 <p className='pl-2 mb-2'>{postData.message}</p>
                 <section className='p-2'>
                     <p>
-                        <span className='text-lg font-bold'>Post by:</span>{' '}
-                        {postData.creator}
-                    </p>
-                    <p>
                         <span className='text-lg font-bold'>Date:</span>{' '}
                         {moment(postData.createdAt).fromNow()}
                     </p>

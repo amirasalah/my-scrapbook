@@ -4,6 +4,15 @@ import { formDataInterface } from '../interfaces'
 
 const API = axios.create({ baseURL: 'https://amira-scrapbook.herokuapp.com/' })
 
+API.interceptors.request.use(req => {
+    if (localStorage.getItem('profile')) {
+        req.headers.Authorization = `Bearer ${
+            JSON.parse(localStorage.getItem('profile')).token
+        }`
+    }
+    return req
+})
+
 export const fetchPosts = async () => {
     const { data } = await API.get('/posts')
     return data
