@@ -1,9 +1,10 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useCallback } from 'react'
 import Container from '../Shared/container/container'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import Button from '../Shared/Button/Button'
 import { useDispatch } from 'react-redux'
 import { LOGOUT } from '../../constants/actionTypes'
+import decode from 'jwt-decode'
 
 export const Header: FC<any> = () => {
     const [user, setUser] = useState(
@@ -13,16 +14,24 @@ export const Header: FC<any> = () => {
     const history = useHistory()
     const location = useLocation()
 
-    const logOut = () => {
+    const logOut = useCallback(() => {
         dispatch({
             type: LOGOUT,
         })
         history.push('/')
         setUser(null)
-    }
+    }, [dispatch, history])
+
     useEffect(() => {
+        const token = user?.token
+        if (token) {
+            const decodedToken: any = decode(token)
+            if (decodedToken.exp * 1000 < new Date().getTime()) {
+                logOut()
+            }
+        }
         setUser(JSON.parse(localStorage.getItem('profile')))
-    }, [location])
+    }, [location, user, logOut])
     return (
         <header className='px-4 bg-red-200'>
             <Container className='py-2'>

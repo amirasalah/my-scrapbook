@@ -4,6 +4,7 @@ export interface postInterface {
     title: string
     message: string
     tags: string[]
+    name: string
     selectedFile: []
     likeCount?: number
     createdAt?: string

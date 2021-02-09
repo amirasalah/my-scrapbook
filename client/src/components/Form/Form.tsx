@@ -11,10 +11,12 @@ const Form: FC<any> = () => {
     const dispatch = useDispatch()
     const { setPopUpVisible } = useContext(PopupContext)
     const { currentId, setCurrentId } = useContext(CurrentIdContext)
+    const user = JSON.parse(localStorage.getItem('profile'))
 
     const emptyPost: postInterface = {
         title: '',
         message: '',
+        name: '',
         tags: [],
         selectedFile: [],
     }
@@ -32,9 +34,14 @@ const Form: FC<any> = () => {
     const handleSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         if (currentId === '0') {
-            dispatch(createPost(postData))
+            dispatch(createPost({ ...postData, name: user?.result?.name }))
         } else {
-            dispatch(updatePost(currentId, postData))
+            dispatch(
+                updatePost(currentId, {
+                    ...postData,
+                    name: user?.result?.name,
+                }),
+            )
         }
         clearForm()
         setPopUpVisible(false)
@@ -42,6 +49,22 @@ const Form: FC<any> = () => {
     const clearForm = () => {
         setPostData(emptyPost)
         setCurrentId('0')
+    }
+    if (!user?.result?.name) {
+        return (
+            <section className='fixed top-0 right-0 bottom-0 left-0 bg-gray-900 bg-opacity-80'>
+                <Container>
+                    <section className='m-32 p-6 bg-gray-50'>
+                        <section className='flex justify-between'>
+                            <p>Please sign in to create your memories!</p>
+                            <button onClick={() => setPopUpVisible(false)}>
+                                Close
+                            </button>
+                        </section>
+                    </section>
+                </Container>
+            </section>
+        )
     }
     return (
         <section className='fixed top-0 right-0 bottom-0 left-0 bg-gray-900 bg-opacity-80'>
