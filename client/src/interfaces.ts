@@ -32,10 +32,8 @@ export interface inputInterface {
     name: string
     handleChange: (event: ChangeEvent<HTMLInputElement>) => void
     label: string
-    half?: boolean
-    autoFocus?: boolean
+    required: boolean
     type?: string
-    handleShowPassword?: Function
 }
 export interface authReducerInterface {
     authData: any

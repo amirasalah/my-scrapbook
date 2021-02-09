@@ -13,16 +13,16 @@ const authReducer = (state = initialValues, action: any) => {
             return {
                 ...state,
                 authData: action?.data,
-                loading: false,
-                errors: null,
+                // loading: false,
+                // errors: null,
             }
         case LOGOUT:
             localStorage.clear()
             return {
                 ...state,
                 authData: null,
-                loading: false,
-                errors: null,
+                // loading: false,
+                // errors: null,
             }
         default:
             return state

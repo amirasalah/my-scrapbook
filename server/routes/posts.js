@@ -7,14 +7,14 @@ import {
     deletePost,
     likePost,
 } from '../controllers/posts.js'
+import { auth } from '../middleware/auth.js'
 
 const postRoutes = express.Router()
 
 postRoutes.get('/', getPosts)
-postRoutes.post('/', createPost)
-postRoutes.get('/:id', getPost)
-postRoutes.patch('/:id', updatePost)
-postRoutes.delete('/:id', deletePost)
-postRoutes.patch('/:id/likePost', likePost)
+postRoutes.post('/', auth, createPost)
+postRoutes.patch('/:id', auth, updatePost)
+postRoutes.delete('/:id', auth, deletePost)
+postRoutes.patch('/:id/likePost', auth, likePost)
 
 export default postRoutes

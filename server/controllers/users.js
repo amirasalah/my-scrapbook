@@ -53,9 +53,12 @@ export const signup = async (req, res) => {
             'test',
             { expiresIn: '1h' },
         )
-        res.status(200).json({
-            result: existingUser,
+        console.log(result)
+        res.status(201).json({
+            result,
             token,
         })
-    } catch (error) {}
+    } catch (error) {
+        res.status(500).json({ message: 'Something went wrong' })
+    }
 }

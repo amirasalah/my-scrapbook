@@ -24,7 +24,6 @@ const Auth: FC<any> = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const history = useHistory()
 
-    const handleShowPassword = (): void => setShowPassword(!showPassword)
     const switchMode = (): void => {
         setForm(initialFormState)
         setIsSignUp(prevIsSignUp => !prevIsSignUp)
@@ -53,32 +52,34 @@ const Auth: FC<any> = () => {
         }
     }
 
-    const googleError = () =>
+    const googleError = (): void =>
         alert('Google Sign In was unsuccessful. Try again later')
     return (
         <Container className='my-8'>
             <h3>{isSignUp ? 'Sign up' : 'Sign in'}</h3>
             <form className='' onSubmit={handleSubmit}>
-                <section>
+                <section className='flex flex-col'>
                     {isSignUp && (
                         <>
                             <Input
                                 name='firstName'
+                                type='text'
+                                required
                                 label='First Name'
                                 handleChange={handleChange}
-                                autoFocus
-                                half
                             />
                             <Input
                                 name='lastName'
+                                type='text'
+                                required
                                 label='Last Name'
                                 handleChange={handleChange}
-                                half
                             />
                         </>
                     )}
                     <Input
                         name='email'
+                        required
                         label='Email Address'
                         handleChange={handleChange}
                         type='email'
@@ -86,14 +87,15 @@ const Auth: FC<any> = () => {
                     <Input
                         name='password'
                         label='Password'
+                        required
                         handleChange={handleChange}
                         type={showPassword ? 'text' : 'password'}
-                        handleShowPassword={handleShowPassword}
                     />
                     {isSignUp && (
                         <Input
                             name='confirmPassword'
                             label='Repeat Password'
+                            required
                             handleChange={handleChange}
                             type='password'
                         />

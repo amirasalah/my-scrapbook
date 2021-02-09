@@ -1,5 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { postInterface } from '../interfaces'
+import { formDataInterface } from '../interfaces'
 
 const API = axios.create({ baseURL: 'https://amira-scrapbook.herokuapp.com/' })
 
@@ -18,5 +19,10 @@ export const deletePost = async (id: string) => await API.delete(`/posts/${id}`)
 export const likePost = async (id: string) =>
     await API.patch(`/posts/${id}/likePost`)
 
-export const signIn = (formData: any) => API.post('/user/signin', formData)
-export const signUp = (formData: any) => API.post('/user/signup', formData)
+export const signIn = (
+    formData: formDataInterface,
+): Promise<AxiosResponse<any>> => API.post('/user/signin', formData)
+
+export const signUp = (
+    formData: formDataInterface,
+): Promise<AxiosResponse<any>> => API.post('/user/signup', formData)

@@ -5,18 +5,18 @@ const Input: FC<inputInterface> = ({
     name,
     handleChange,
     label,
-    half,
-    autoFocus,
     type,
-    handleShowPassword,
+    required,
 }) => (
-    <input
-        name={name}
-        onChange={handleChange}
-        required
-        autoFocus={autoFocus}
-        type={type}
-    />
+    <>
+        <label>{label}</label>
+        <input
+            name={name}
+            onChange={handleChange}
+            required={required}
+            type={type}
+        />
+    </>
 )
 
 export default Input
