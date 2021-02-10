@@ -2,8 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { postInterface } from '../interfaces'
 import { formDataInterface } from '../interfaces'
 
-//https://amira-scrapbook.herokuapp.com/
-const API = axios.create({ baseURL: 'http://localhost:5000/' })
+const API = axios.create({ baseURL: 'https://amira-scrapbook.herokuapp.com/' })
 
 API.interceptors.request.use(req => {
     if (localStorage.getItem('profile')) {
