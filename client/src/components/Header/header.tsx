@@ -4,7 +4,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import Button from '../Shared/Button/Button'
 import { useDispatch } from 'react-redux'
 import { LOGOUT } from '../../constants/actionTypes'
-import decode from 'jwt-decode'
 
 export const Header: FC<any> = () => {
     const [user, setUser] = useState(
@@ -23,13 +22,6 @@ export const Header: FC<any> = () => {
     }, [dispatch, history])
 
     useEffect(() => {
-        const token = user?.token
-        if (token) {
-            const decodedToken: any = decode(token)
-            if (decodedToken.exp * 1000 < new Date().getTime()) {
-                logOut()
-            }
-        }
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
     return (
