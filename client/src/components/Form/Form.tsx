@@ -17,6 +17,7 @@ const Form: FC<any> = () => {
         title: '',
         message: '',
         name: '',
+        likes: '',
         tags: [],
         selectedFile: [],
     }

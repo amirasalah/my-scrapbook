@@ -6,7 +6,6 @@ const postSchema = mongoose.Schema({
     creator: String,
     name: String,
     tags: [String],
-    selectedFile: [],
     likes: {
         type: [String],
         default: [],
@@ -16,5 +15,5 @@ const postSchema = mongoose.Schema({
         default: new Date(),
     },
 })
-const postMessage = mongoose.model('postMessage', postSchema)
-export default postMessage
+const PostMessage = mongoose.model('postMessage', postSchema)
+export default PostMessage

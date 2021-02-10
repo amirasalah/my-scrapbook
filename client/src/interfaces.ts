@@ -6,7 +6,7 @@ export interface postInterface {
     tags: string[]
     name: string
     selectedFile: []
-    likeCount?: number
+    likes: string
     createdAt?: string
     _id?: string
 }

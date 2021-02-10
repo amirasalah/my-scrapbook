@@ -2,11 +2,12 @@ import axios, { AxiosResponse } from 'axios'
 import { postInterface } from '../interfaces'
 import { formDataInterface } from '../interfaces'
 
-const API = axios.create({ baseURL: 'https://amira-scrapbook.herokuapp.com/' })
+//https://amira-scrapbook.herokuapp.com/
+const API = axios.create({ baseURL: 'http://localhost:5000/' })
 
 API.interceptors.request.use(req => {
     if (localStorage.getItem('profile')) {
-        req.headers.Authorization = `Bearer ${
+        req.headers.authorization = `Bearer ${
             JSON.parse(localStorage.getItem('profile')).token
         }`
     }
@@ -25,7 +26,7 @@ export const updatePost = async (id: string, newPost: postInterface) =>
 
 export const deletePost = async (id: string) => await API.delete(`/posts/${id}`)
 
-export const likePost = async (id: string) =>
+export const likePost = async (id: string, token: any) =>
     await API.patch(`/posts/${id}/likePost`)
 
 export const signIn = (

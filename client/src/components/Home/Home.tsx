@@ -13,7 +13,7 @@ const Home: FC<any> = () => {
     const dispatch = useDispatch<Dispatch<any>>()
     useEffect(() => {
         dispatch(getPosts())
-    }, [dispatch])
+    })
     return (
         <Container className='flex justify-center'>
             <section className='flex flex-col'>

@@ -31,7 +31,7 @@ export const Header: FC<any> = () => {
             }
         }
         setUser(JSON.parse(localStorage.getItem('profile')))
-    }, [location, user, logOut])
+    }, [location])
     return (
         <header className='px-4 bg-red-200'>
             <Container className='py-2'>

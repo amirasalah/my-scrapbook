@@ -35,7 +35,7 @@ const Post: FC<postComponentInterface> = ({ postData }) => {
                     </p>
                     <p>
                         <span className='text-lg font-bold'>Likes:</span>{' '}
-                        {postData.likeCount}
+                        {postData.likes.length}
                     </p>
                 </section>
             </section>
